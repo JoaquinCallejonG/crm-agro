@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 
-DATABASE_URL = "postgresql://crm_user:crm_password@127.0.0.1:5432/crm_db"
+from app.core.config import DATABASE_URL
 
 engine = create_engine(DATABASE_URL)
 
