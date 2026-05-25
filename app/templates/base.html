@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Mi CRM{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+
+<!-- OVERLAY MOBILE -->
+<div id="overlay"
+     onclick="closeSidebar()"
+     class="fixed inset-0 bg-black/50 z-30 hidden md:hidden">
+</div>
+
+<div class="flex min-h-screen">
+
+    <!-- SIDEBAR -->
+<!-- SIDEBAR -->
+<!-- SIDEBAR -->
+<aside id="sidebar"
+    class="fixed md:static z-40 top-0 left-0 h-full bg-gray-900 text-white
+           w-64 md:w-72 lg:w-80 p-4 transform -translate-x-full md:translate-x-0
+           transition-all duration-300">
+
+    <div class="h-full flex flex-col">
+
+        <!-- HEADER SIDEBAR -->
+        <div class="flex items-center justify-between mb-6">
+            <div id="sidebar-title">
+                <h2 class="text-2xl font-bold">Mi CRM</h2>
+                <p class="text-xs text-gray-400 mt-1">Gestión comercial</p>
+            </div>
+
+            <!-- Cerrar mobile -->
+            <button onclick="closeSidebar()" class="md:hidden text-white text-xl">
+                ✕
+            </button>
+
+            <!-- Minimizar desktop -->
+            <button onclick="toggleCollapseSidebar()" class="hidden md:block text-gray-300 hover:text-white text-xl">
+                ☰
+            </button>
+        </div>
+
+        <!-- NAV -->
+        <nav class="space-y-2 text-sm lg:text-base flex-1">
+
+            <!-- DASHBOARD -->
+            <a href="/dashboard" class="group flex items-center gap-3 p-2.5 rounded-lg hover:bg-gray-800 transition">
+                <svg class="w-5 h-5 lg:w-6 lg:h-6 text-gray-300 group-hover:text-white transition"
+                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                          d="M3 3h7v9H3V3zm11 0h7v5h-7V3zM3 15h7v6H3v-6zm11-4h7v10h-7V11z"/>
+                </svg>
+                <span class="nav-text">Dashboard</span>
+            </a>
+
+            <!-- FACTURAS -->
+            <a href="/facturas" class="group flex items-center gap-3 p-2.5 rounded-lg hover:bg-gray-800 transition">
+                <svg class="w-5 h-5 lg:w-6 lg:h-6 text-gray-300 group-hover:text-white transition"
+                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                     stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                          d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                </svg>
+                <span class="nav-text">Facturas</span>
+            </a>
+
+            <!-- PROVEEDORES -->
+            <a href="/clientes" class="group flex items-center gap-3 p-2.5 rounded-lg hover:bg-gray-800 transition">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                     stroke="currentColor"
+                     class="w-5 h-5 lg:w-6 lg:h-6 text-gray-300 group-hover:text-white transition">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                          d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z" />
+                </svg>
+                <span class="nav-text">Proveedores</span>
+            </a>
+
+            <!-- SALIR -->
+            <a href="/logout" class="group flex items-center gap-3 p-2.5 rounded-lg hover:bg-red-600 transition mt-6">
+                <svg class="w-5 h-5 lg:w-6 lg:h-6 text-gray-300 group-hover:text-white transition"
+                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                          d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6A2.25 2.25 0 005.25 5.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M18 12l3-3m0 0l-3-3m3 3H9"/>
+                </svg>
+                <span class="nav-text">Salir</span>
+            </a>
+
+        </nav>
+
+        <!-- FOOTER SIDEBAR -->
+        <div class="pt-4 border-t border-gray-700">
+
+            <div class="flex items-center gap-3 p-3 rounded-xl bg-gray-800/80">
+                <div class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold">
+                    A
+                </div>
+
+                <div class="sidebar-footer-text">
+                    <p class="text-sm font-semibold">Admin</p>
+                    <p class="text-xs text-gray-400">Sesión activa</p>
+                </div>
+            </div>
+
+            <div class="sidebar-footer-text mt-3 text-xs text-gray-500 leading-relaxed">
+                <p>CRM Confección</p>
+                <p>Versión 0.1</p>
+            </div>
+
+        </div>
+
+    </div>
+</aside>
+
+    <!-- CONTENEDOR -->
+    <div class="flex-1 flex flex-col min-w-0">
+
+        <!-- TOPBAR -->
+        <header class="bg-white shadow-sm border-b border-gray-200 h-16 flex items-center justify-between px-4 md:px-6">
+
+            <div class="flex items-center gap-3">
+                <button onclick="openSidebar()" class="md:hidden text-2xl">
+                    ☰
+                </button>
+
+                <div>
+                    <h1 class="font-bold text-gray-800">
+                        {% block page_title %}Panel{% endblock %}
+                    </h1>
+                    <p class="text-xs text-gray-500 hidden sm:block">
+                        {% block page_subtitle %}Sistema de gestión{% endblock %}
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <span class="hidden sm:block text-sm text-gray-600">Admin</span>
+                <div class="w-9 h-9 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold">
+                    A
+                </div>
+            </div>
+
+        </header>
+
+        <!-- CONTENT -->
+        <main class="flex-1 p-4 md:p-6">
+            {% block content %}{% endblock %}
+        </main>
+
+    </div>
+
+</div>
+
+        <!-- Coneccion con las facturas -->
+<script src="{{ url_for('static', path='js/app.js') }}"></script>
+

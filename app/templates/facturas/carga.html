@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+
+{% block title %}Ingreso Manual{% endblock %}
+{% block page_title %}Ingreso manual de factura{% endblock %}
+{% block page_subtitle %}Registro rápido de documentos{% endblock %}
+
+{% block content %}
+
+<div class="flex justify-center">
+
+    <div class="w-full max-w-3xl">
+
+        <div class="card bg-base-100 shadow-sm border border-gray-200">
+
+            <div class="card-body space-y-6">
+
+                <!-- TÍTULO -->
+                <div>
+                    <h2 class="text-xl font-semibold text-gray-800">
+                        Registrar factura
+                    </h2>
+                    <p class="text-sm text-gray-500">
+                        Completa los datos principales del documento
+                    </p>
+                </div>
+
+                <!-- FORMULARIO -->
+                <form action="/facturas/manual" method="POST" class="space-y-6">
+
+                    <!-- DATOS PROVEEDOR -->
+                    <div>
+                        <h3 class="text-sm font-semibold text-gray-600 mb-3">
+                            Datos del proveedor
+                        </h3>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                            <div>
+                                <label class="label">
+                                    <span class="label-text font-medium">
+                                        Nombre proveedor *
+                                    </span>
+                                </label>
+                                <input type="text" name="nombre"
+                                       class="input input-bordered w-full"
+                                       placeholder="Ej: Textiles del Sur Ltda."
+                                       required>
+                            </div>
+
+                            <div>
+                                <label class="label">
+                                    <span class="label-text font-medium">
+                                        RUT empresa *
+                                    </span>
+                                </label>
+                                <input type="text" name="rut"
+                                       class="input input-bordered w-full"
+                                       placeholder="Ej: 76.123.456-7"
+                                       required>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- DATOS FACTURA -->
+                    <div>
+                        <h3 class="text-sm font-semibold text-gray-600 mb-3">
+                            Datos de la factura
+                        </h3>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                            <div>
+                                <label class="label">
+                                    <span class="label-text font-medium">
+                                        Número de factura *
+                                    </span>
+                                </label>
+                                <input type="text" name="numero_factura"
+                                       class="input input-bordered w-full"
+                                       placeholder="Ej: F-001245"
+                                       required>
+                            </div>
+
+                            <div>
+                                <label class="label">
+                                    <span class="label-text font-medium">
+                                        Fecha de emisión *
+                                    </span>
+                                </label>
+                                <input type="date" name="fecha_emision"
+                                       class="input input-bordered w-full"
+                                       required>
+                            </div>
+
+                            <div>
+                                <label class="label">
+                                    <span class="label-text font-medium">
+                                        Fecha de vencimiento
+                                    </span>
+                                </label>
+                                <input type="date" name="fecha_vencimiento"
+                                       class="input input-bordered w-full">
+                            </div>
+
+                            <div>
+                                <label class="label">
+                                    <span class="label-text font-medium">
+                                        Monto neto *
+                                    </span>
+                                </label>
+                                <input type="number" name="monto"
+                                       class="input input-bordered w-full"
+                                       placeholder="Ej: 150000"
+                                       required>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- DESCRIPCIÓN -->
+                    <div>
+                        <label class="label">
+                            <span class="label-text font-medium">
+                                Descripción / Ítem
+                            </span>
+                        </label>
+                        <textarea name="descripcion"
+                                  class="textarea textarea-bordered w-full"
+                                  placeholder="Detalle opcional de la factura"></textarea>
+                    </div>
+
+                    <!-- ACCIONES -->
+                    <div class="flex flex-col md:flex-row gap-3 pt-4">
+
+                        <button type="submit"
+                                class="btn btn-primary flex-1">
+                            Registrar factura
+                        </button>
+
+                        <a href="/facturas"
+                           class="btn btn-outline flex-1">
+                            Cancelar
+                        </a>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

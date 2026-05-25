@@ -1,0 +1,12 @@
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+C:\ProyectoCRM\venv\Scripts\python.exe -m uvicorn app.main:app --reload
+
+npm run watch:css
+
+cd C:\ProyectoCRM
+venv\Scripts\activate.bat
+
+venv\Scripts\activate
+uvicorn app.main:app --reload
+
+http://127.0.0.1:8000/login

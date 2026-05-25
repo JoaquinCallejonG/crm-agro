@@ -1,0 +1,13 @@
+{
+  "name": "crm-frontend",
+  "version": "1.0.0",
+  "scripts": {
+    "watch:css": "npx @tailwindcss/cli -i ./app/static/css/input.css -o ./app/static/css/output.css --watch",
+    "build:css": "npx @tailwindcss/cli -i ./app/static/css/input.css -o ./app/static/css/output.css --minify"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.0",
+    "tailwindcss": "^4.1.0",
+    "daisyui": "^5.0.0"
+  }
+}

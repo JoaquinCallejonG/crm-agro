@@ -1,0 +1,280 @@
+{% extends "base.html" %}
+
+{% block title %}Facturas{% endblock %}
+{% block page_title %}Facturas{% endblock %}
+{% block page_subtitle %}Carga, revisión y aprobación de documentos{% endblock %}
+
+{% block content %}
+
+<div class="space-y-6">
+
+    <!-- RESUMEN -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+        <div class="bg-white p-5 rounded-lg shadow-sm border border-gray-200">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm text-gray-500">Facturas pendientes</p>
+                    <h2 class="text-3xl font-bold text-gray-800 mt-1">12</h2>
+                </div>
+
+                <div class="bg-blue-100 p-4 rounded-2xl">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         viewBox="0 0 24 24"
+                         fill="currentColor"
+                         class="w-9 h-9 text-blue-600">
+                        <path fill-rule="evenodd"
+                              d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.036.84 1.875 1.875 1.875h12.75c1.036 0 1.875-.84 1.875-1.875V8.25a6.75 6.75 0 0 0-6.75-6.75H5.625Zm7.125 1.5v4.125c0 .621.504 1.125 1.125 1.125H18a5.25 5.25 0 0 0-5.25-5.25Z"
+                              clip-rule="evenodd" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white p-5 rounded-lg shadow-sm border border-gray-200">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm text-gray-500">Facturas aprobadas</p>
+                    <h2 class="text-3xl font-bold text-gray-800 mt-1">30</h2>
+                </div>
+
+                <div class="bg-green-100 p-4 rounded-2xl">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         viewBox="0 0 24 24"
+                         fill="currentColor"
+                         class="w-9 h-9 text-green-600">
+                        <path fill-rule="evenodd"
+                              d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.28-2.28a.75.75 0 0 0-1.06-1.06l-3.72 3.72-1.72-1.72a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.06 0l4.25-4.25Z"
+                              clip-rule="evenodd" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ACCIONES -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+
+    <!-- CARGAR FACTURA -->
+    <div class="bg-white p-5 rounded-lg shadow-sm border border-gray-200">
+
+        <div class="flex items-center gap-3 mb-3">
+            <div class="bg-blue-100 p-3 rounded-xl">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     viewBox="0 0 24 24"
+                     fill="currentColor"
+                     class="w-7 h-7 text-blue-600">
+                    <path fill-rule="evenodd"
+                          d="M11.47 2.47a.75.75 0 0 1 1.06 0l4.5 4.5a.75.75 0 0 1-1.06 1.06l-3.22-3.22V16.5a.75.75 0 0 1-1.5 0V4.81L8.03 8.03a.75.75 0 0 1-1.06-1.06l4.5-4.5Z"
+                          clip-rule="evenodd" />
+                    <path d="M3.75 15.75a.75.75 0 0 1 .75.75v3h15v-3a.75.75 0 0 1 1.5 0v3.75a.75.75 0 0 1-.75.75H3.75A.75.75 0 0 1 3 20.25V16.5a.75.75 0 0 1 .75-.75Z" />
+                </svg>
+            </div>
+
+            <div>
+                <h2 class="font-semibold text-gray-800">Cargar factura</h2>
+                <p class="text-sm text-gray-500">Subir archivo PDF</p>
+            </div>
+        </div>
+
+       <form action="/facturas/upload" method="post" enctype="multipart/form-data" class="mt-4 space-y-3">
+
+    <!-- INPUT OCULTO -->
+    <input 
+        type="file" 
+        name="archivo" 
+        id="fileInput"
+        accept="application/pdf"
+        class="hidden"
+        onchange="updateFileName(this)"
+        required
+    >
+
+<!-- CARGA DE FACTURA -->     <!-- BOTÓN PDF -->
+        <form action="/facturas/upload" method="post" enctype="multipart/form-data" class="mt-4 space-y-3">
+
+            <!-- INPUT REAL OCULTO -->
+            <input 
+                type="file" 
+                name="archivo" 
+                id="fileInput"
+                accept="application/pdf"
+                class="hidden"
+                onchange="updateFileName(this)"
+                required
+            >
+
+            <!-- BOTÓN ELEGIR FACTURA -->
+            <label id="fileButton"
+                for="fileInput"
+                class="flex items-center justify-center gap-2 w-full px-4 py-2 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100 transition text-gray-700">
+
+                <svg xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    class="w-5 h-5 text-blue-600">
+                    <path fill-rule="evenodd"
+                        d="M11.47 2.47a.75.75 0 0 1 1.06 0l4.5 4.5a.75.75 0 0 1-1.06 1.06l-3.22-3.22V16.5a.75.75 0 0 1-1.5 0V4.81L8.03 8.03a.75.75 0 0 1-1.06-1.06l4.5-4.5Z"
+                        clip-rule="evenodd" />
+                    <path d="M3.75 15.75a.75.75 0 0 1 .75.75v3h15v-3a.75.75 0 0 1 1.5 0v3.75a.75.75 0 0 1-.75.75H3.75A.75.75 0 0 1 3 20.25V16.5a.75.75 0 0 1 .75-.75Z" />
+                </svg>
+
+                <span id="fileButtonText">Elegir factura PDF</span>
+            </label>
+
+            <!-- NOMBRE ARCHIVO -->
+            <p id="fileName" class="text-sm text-gray-500 text-center">
+                Ningún archivo seleccionado
+            </p>
+
+            <!-- BOTÓN SUBIR -->
+            <button type="submit" class="btn btn-primary w-full">
+                Cargar factura
+            </button>
+
+            <!-- DIVISOR -->
+            <div class="flex items-center gap-2 my-2">
+                <div class="flex-1 h-px bg-gray-200"></div>
+                <span class="text-xs text-gray-400">o</span>
+                <div class="flex-1 h-px bg-gray-200"></div>
+            </div>
+
+            <!-- BOTÓN MANUAL -->
+            <a href="/facturas/carga"
+            class="flex items-center justify-center gap-2 w-full px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-100 transition text-gray-700">
+
+                <svg xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    class="w-5 h-5 text-green-600">
+                    <path d="M16.862 3.487a1.875 1.875 0 1 1 2.651 2.651L7.125 18.526l-3.75.938.938-3.75L16.862 3.487Z"/>
+                    <path d="M19.5 14.25v2.625A3.375 3.375 0 0 1 16.125 20.25H6.75A3.375 3.375 0 0 1 3.375 16.875V7.5A3.375 3.375 0 0 1 6.75 4.125h2.625"/>
+                </svg>
+
+                <span>Ingreso manual</span>
+            </a>
+
+        </form>
+    </div>
+
+    <!-- REVISIÓN -->
+    <div class="bg-white p-5 rounded-lg shadow-sm border border-gray-200">
+
+        <div class="flex items-center gap-3 mb-3">
+            <div class="bg-sky-100 p-3 rounded-xl">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     viewBox="0 0 24 24"
+                     fill="currentColor"
+                     class="w-7 h-7 text-sky-600">
+                    <path d="M10.5 3.75a6.75 6.75 0 1 0 4.243 12.016l3.496 3.496a.75.75 0 1 0 1.06-1.06l-3.496-3.496A6.75 6.75 0 0 0 10.5 3.75Z" />
+                </svg>
+            </div>
+
+            <div>
+                <h2 class="font-semibold text-gray-800">Revisar facturas</h2>
+                <p class="text-sm text-gray-500">Ver documentos pendientes</p>
+            </div>
+        </div>
+
+        <a href="/facturas/revision" class="btn btn-info w-full mt-4 text-white">
+            Ir a revisión
+        </a>
+        
+
+    </div>
+
+    <!-- APROBACIÓN -->
+    <div class="bg-white p-5 rounded-lg shadow-sm border border-gray-200">
+
+        <div class="flex items-center gap-3 mb-3">
+            <div class="bg-green-100 p-3 rounded-xl">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     viewBox="0 0 24 24"
+                     fill="currentColor"
+                     class="w-7 h-7 text-green-600">
+                    <path fill-rule="evenodd"
+                          d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.28-2.28a.75.75 0 0 0-1.06-1.06l-3.72 3.72-1.72-1.72a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.06 0l4.25-4.25Z"
+                          clip-rule="evenodd" />
+                </svg>
+            </div>
+
+            <div>
+                <h2 class="font-semibold text-gray-800">Aprobar facturas</h2>
+                <p class="text-sm text-gray-500">Validar documentos revisados</p>
+            </div>
+        </div>
+
+        <a href="/facturas/aprobacion" class="btn btn-success w-full mt-4">
+            Ir a aprobación
+        </a>
+
+    </div>
+
+</div>
+
+    <!-- TABLA FACTURAS PENDIENTES -->
+    <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+
+        <div class="px-5 py-4 border-b border-gray-200 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+            <div>
+                <h2 class="text-lg font-semibold text-gray-800">Facturas pendientes</h2>
+                <p class="text-sm text-gray-500">Listado inicial para revisión y conexión futura con base de datos</p>
+            </div>
+
+            <a href="/facturas/revision" class="btn btn-sm btn-primary">
+                Revisar pendientes
+            </a>
+        </div>
+
+        <div class="overflow-x-auto">
+            <table class="table w-full">
+                <thead class="bg-gray-50 text-gray-600">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>N° Factura</th>
+                        <th>Fecha vencimiento</th>
+                        <th>Estado</th>
+                        <th class="text-right">Monto neto</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr class="hover">
+                        <td class="font-medium text-gray-800">Proveedor Textil Norte</td>
+                        <td>F-001245</td>
+                        <td>30-05-2026</td>
+                        <td>
+                            <span class="badge badge-warning">Pendiente</span>
+                        </td>
+                        <td class="text-right font-semibold">$450.000</td>
+                    </tr>
+
+                    <tr class="hover">
+                        <td class="font-medium text-gray-800">Confecciones Sur</td>
+                        <td>F-001246</td>
+                        <td>05-06-2026</td>
+                        <td>
+                            <span class="badge badge-info text-white">En revisión</span>
+                        </td>
+                        <td class="text-right font-semibold">$820.000</td>
+                    </tr>
+
+                    <tr class="hover">
+                        <td class="font-medium text-gray-800">Servicios Industriales Ltda.</td>
+                        <td>F-001247</td>
+                        <td>12-06-2026</td>
+                        <td>
+                            <span class="badge badge-warning">Pendiente</span>
+                        </td>
+                        <td class="text-right font-semibold">$1.250.000</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Facturas{% endblock %}
+
+{% block content %}
+
+<h1 class="text-2xl font-bold mb-6">Módulo de Facturas 📄</h1>
+
+<!-- TARJETAS RESUMEN -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+
+    <div class="bg-white p-4 rounded shadow">
+        <h2 class="text-lg font-bold">Facturas pendientes</h2>
+        <p class="text-2xl mt-2">12</p>
+    </div>
+
+    <div class="bg-white p-4 rounded shadow">
+        <h2 class="text-lg font-bold">Facturas aprobadas</h2>
+        <p class="text-2xl mt-2">30</p>
+    </div>
+
+</div>
+
+<!-- TARJETAS ACCIONES -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+
+    <!-- CARGA -->
+    <div class="bg-white p-4 rounded shadow">
+        <h2 class="font-bold mb-2">📤 Cargar factura</h2>
+        <p class="text-sm mb-4">Subir archivo PDF</p>
+
+        <form action="/facturas/upload" method="post" enctype="multipart/form-data">
+            <input type="file" name="archivo" class="mb-2">
+            <button class="bg-blue-600 text-white px-3 py-1 rounded w-full">
+                Subir
+            </button>
+        </form>
+    </div>
+
+    <!-- REVISIÓN -->
+    <div class="bg-white p-4 rounded shadow">
+        <h2 class="font-bold mb-2">🔍 Revisar facturas</h2>
+        <p class="text-sm mb-4">Ver estado de documentos</p>
+
+        <a href="/facturas/revision"
+           class="block text-center bg-gray-700 text-white px-3 py-1 rounded">
+            Ir a revisión
+        </a>
+    </div>
+
+    <!-- APROBACIÓN -->
+    <div class="bg-white p-4 rounded shadow">
+        <h2 class="font-bold mb-2">✅ Aprobar facturas</h2>
+        <p class="text-sm mb-4">Validar documentos</p>
+
+        <a href="/facturas/aprobacion"
+           class="block text-center bg-green-600 text-white px-3 py-1 rounded">
+            Ir a aprobación
+        </a>
+    </div>
+
+</div>
+
+{% endblock %}
