@@ -1,0 +1,269 @@
+{% extends "base.html" %}
+
+{% block title %}Proveedores{% endblock %}
+{% block page_title %}Proveedores{% endblock %}
+{% block page_subtitle %}Registro, facturación y análisis comercial{% endblock %}
+
+{% block content %}
+
+<div class="space-y-6">
+
+    <!-- RESUMEN -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+        <div class="bg-white p-5 rounded-lg shadow-sm border border-gray-200">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm text-gray-500">Proveedores activos</p>
+                    <h2 class="text-3xl font-bold text-gray-800 mt-1">18</h2>
+                </div>
+                <div class="bg-blue-100 p-4 rounded-2xl">
+                    <svg class="w-9 h-9 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M7.5 6.75a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.75 20.25a8.25 8.25 0 0 1 16.5 0v.75H3.75v-.75Z"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white p-5 rounded-lg shadow-sm border border-gray-200">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm text-gray-500">Facturación mensual</p>
+                    <h2 class="text-3xl font-bold text-gray-800 mt-1">$6.850.000</h2>
+                </div>
+                <div class="bg-green-100 p-4 rounded-2xl">
+                    <svg class="w-9 h-9 text-green-600" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M2.25 6.75A2.25 2.25 0 0 1 4.5 4.5h15a2.25 2.25 0 0 1 2.25 2.25v10.5A2.25 2.25 0 0 1 19.5 19.5h-15a2.25 2.25 0 0 1-2.25-2.25V6.75Z"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white p-5 rounded-lg shadow-sm border border-gray-200">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm text-gray-500">Pendientes de pago</p>
+                    <h2 class="text-3xl font-bold text-gray-800 mt-1">7</h2>
+                </div>
+                <div class="bg-amber-100 p-4 rounded-2xl">
+                    <svg class="w-9 h-9 text-amber-600" fill="currentColor" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd" d="M12 2.25a9.75 9.75 0 1 0 0 19.5 9.75 9.75 0 0 0 0-19.5ZM12.75 6a.75.75 0 0 0-1.5 0v6c0 .199.079.39.22.53l3 3a.75.75 0 1 0 1.06-1.06l-2.78-2.78V6Z" clip-rule="evenodd"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- FORMULARIO + FICHA -->
+    <div class="grid grid-cols-1 xl:grid-cols-3 gap-4">
+
+        <!-- FORMULARIO -->
+        <div class="xl:col-span-2 bg-white p-5 rounded-lg shadow-sm border border-gray-200">
+            <div class="mb-5">
+                <h2 class="text-lg font-semibold text-gray-800">Registrar proveedor</h2>
+                <p class="text-sm text-gray-500">Datos básicos y de facturación</p>
+            </div>
+
+            <form action="/proveedores/registrar" method="post" class="space-y-5">
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="label">
+                            <span class="label-text font-medium">Nombre proveedor *</span>
+                        </label>
+                        <input type="text" name="nombre" class="input input-bordered w-full" placeholder="Ej: Textiles del Sur Ltda." required>
+                    </div>
+
+                    <div>
+                        <label class="label">
+                            <span class="label-text font-medium">RUT empresa *</span>
+                        </label>
+                        <input type="text" name="rut" class="input input-bordered w-full" placeholder="Ej: 76.123.456-7" required>
+                    </div>
+
+                    <div>
+                        <label class="label">
+                            <span class="label-text font-medium">Correo facturación</span>
+                        </label>
+                        <input type="email" name="correo_facturacion" class="input input-bordered w-full" placeholder="facturacion@empresa.cl">
+                    </div>
+
+                    <div>
+                        <label class="label">
+                            <span class="label-text font-medium">Teléfono contacto</span>
+                        </label>
+                        <input type="text" name="telefono" class="input input-bordered w-full" placeholder="+56 9 1234 5678">
+                    </div>
+
+                    <div>
+                        <label class="label">
+                            <span class="label-text font-medium">Condición de pago</span>
+                        </label>
+                        <select name="condicion_pago" class="select select-bordered w-full">
+                            <option>Contado</option>
+                            <option>15 días</option>
+                            <option>30 días</option>
+                            <option>60 días</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="label">
+                            <span class="label-text font-medium">Estado facturación</span>
+                        </label>
+                        <select name="estado_facturacion" class="select select-bordered w-full">
+                            <option>Activo</option>
+                            <option>Pendiente documentación</option>
+                            <option>Bloqueado</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="label">
+                        <span class="label-text font-medium">Observaciones</span>
+                    </label>
+                    <textarea name="observaciones" class="textarea textarea-bordered w-full" placeholder="Notas internas del proveedor"></textarea>
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-3 pt-2">
+                    <button type="submit" class="btn btn-primary flex-1">
+                        Registrar proveedor
+                    </button>
+                    <button type="reset" class="btn btn-outline flex-1">
+                        Limpiar formulario
+                    </button>
+                </div>
+
+            </form>
+        </div>
+
+        <!-- FICHA RESUMEN -->
+        <div class="bg-white p-5 rounded-lg shadow-sm border border-gray-200">
+            <div class="flex items-center gap-3 mb-4">
+                <div class="bg-sky-100 p-3 rounded-xl">
+                    <svg class="w-7 h-7 text-sky-600" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12.378 1.602a.75.75 0 0 0-.756 0L3 6.632l9 5.25 9-5.25-8.622-5.03Z"/>
+                        <path d="M21.75 8.025 12.75 13.275v9.073l8.628-5.033a.75.75 0 0 0 .372-.648V8.025Z"/>
+                        <path d="M11.25 22.348v-9.073L2.25 8.025v8.642a.75.75 0 0 0 .372.648l8.628 5.033Z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h2 class="font-semibold text-gray-800">Ficha productos</h2>
+                    <p class="text-sm text-gray-500">Ejemplo por proveedor</p>
+                </div>
+            </div>
+
+            <div class="space-y-3">
+                <div class="p-3 rounded-lg bg-gray-50 border border-gray-200">
+                    <p class="font-medium text-gray-800">Telas algodón</p>
+                    <p class="text-sm text-gray-500">Proveedor: Textiles del Sur</p>
+                    <p class="text-sm text-green-600 mt-1">Volumen: $2.400.000</p>
+                </div>
+
+                <div class="p-3 rounded-lg bg-gray-50 border border-gray-200">
+                    <p class="font-medium text-gray-800">Hilos industriales</p>
+                    <p class="text-sm text-gray-500">Proveedor: Insumos Norte</p>
+                    <p class="text-sm text-blue-600 mt-1">Volumen: $1.350.000</p>
+                </div>
+
+                <div class="p-3 rounded-lg bg-gray-50 border border-gray-200">
+                    <p class="font-medium text-gray-800">Cierres metálicos</p>
+                    <p class="text-sm text-gray-500">Proveedor: Importadora Central</p>
+                    <p class="text-sm text-purple-600 mt-1">Volumen: $980.000</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- LISTADO + ANÁLISIS -->
+    <div class="grid grid-cols-1 xl:grid-cols-2 gap-4">
+
+        <!-- LISTADO -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+            <div class="px-5 py-4 border-b border-gray-200">
+                <h2 class="text-lg font-semibold text-gray-800">Listado de proveedores</h2>
+                <p class="text-sm text-gray-500">Base para conectar con PostgreSQL</p>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="table w-full">
+                    <thead class="bg-gray-50 text-gray-600">
+                        <tr>
+                            <th>Proveedor</th>
+                            <th>RUT</th>
+                            <th>Estado</th>
+                            <th class="text-right">Volumen</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="hover">
+                            <td class="font-medium text-gray-800">Textiles del Sur</td>
+                            <td>76.123.456-7</td>
+                            <td><span class="badge badge-success">Activo</span></td>
+                            <td class="text-right font-semibold">$2.400.000</td>
+                        </tr>
+                        <tr class="hover">
+                            <td class="font-medium text-gray-800">Insumos Norte</td>
+                            <td>77.555.111-2</td>
+                            <td><span class="badge badge-warning">Pendiente</span></td>
+                            <td class="text-right font-semibold">$1.350.000</td>
+                        </tr>
+                        <tr class="hover">
+                            <td class="font-medium text-gray-800">Importadora Central</td>
+                            <td>78.222.900-1</td>
+                            <td><span class="badge badge-error">Bloqueado</span></td>
+                            <td class="text-right font-semibold">$980.000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- BARRAS VOLUMEN -->
+        <div class="bg-white p-5 rounded-lg shadow-sm border border-gray-200">
+            <div class="mb-5">
+                <h2 class="text-lg font-semibold text-gray-800">Volumen por proveedor</h2>
+                <p class="text-sm text-gray-500">Gráfica simple de ejemplo</p>
+            </div>
+
+            <div class="space-y-4">
+                <div>
+                    <div class="flex justify-between text-sm mb-1">
+                        <span class="font-medium text-gray-700">Textiles del Sur</span>
+                        <span class="text-gray-500">$2.400.000</span>
+                    </div>
+                    <div class="w-full bg-gray-100 rounded-full h-3">
+                        <div class="bg-green-600 h-3 rounded-full" style="width: 100%;"></div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="flex justify-between text-sm mb-1">
+                        <span class="font-medium text-gray-700">Insumos Norte</span>
+                        <span class="text-gray-500">$1.350.000</span>
+                    </div>
+                    <div class="w-full bg-gray-100 rounded-full h-3">
+                        <div class="bg-blue-600 h-3 rounded-full" style="width: 56%;"></div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="flex justify-between text-sm mb-1">
+                        <span class="font-medium text-gray-700">Importadora Central</span>
+                        <span class="text-gray-500">$980.000</span>
+                    </div>
+                    <div class="w-full bg-gray-100 rounded-full h-3">
+                        <div class="bg-purple-600 h-3 rounded-full" style="width: 41%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

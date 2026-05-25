@@ -1,0 +1,162 @@
+{% extends "base.html" %}
+
+{% block title %}Ventas{% endblock %}
+{% block page_title %}Ventas{% endblock %}
+{% block page_subtitle %}Resumen comercial, caja y productos{% endblock %}
+
+{% block content %}
+
+<div class="space-y-6">
+
+    <!-- BLOQUE SUPERIOR -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+
+        <!-- IR A CAJA -->
+        <a href="/ventas/caja"
+           class="bg-white p-5 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition group">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm text-gray-500">Acceso rápido</p>
+                    <h2 class="text-xl font-bold text-gray-800 mt-1">Ir a caja</h2>
+                    <p class="text-sm text-gray-500 mt-2">Registrar ventas y pagos</p>
+                </div>
+
+                <div class="bg-green-100 p-4 rounded-2xl group-hover:bg-green-200 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         viewBox="0 0 24 24"
+                         fill="currentColor"
+                         class="w-9 h-9 text-green-600">
+                        <path d="M2.25 7.125C2.25 6.09 3.09 5.25 4.125 5.25h15.75c1.035 0 1.875.84 1.875 1.875v9.75c0 1.035-.84 1.875-1.875 1.875H4.125A1.875 1.875 0 0 1 2.25 16.875v-9.75Z"/>
+                        <path d="M6.75 9.75a.75.75 0 0 0 0 1.5h10.5a.75.75 0 0 0 0-1.5H6.75Z"/>
+                    </svg>
+                </div>
+            </div>
+        </a>
+
+        <!-- RESUMEN VENTAS -->
+        <div class="bg-gradient-to-br from-blue-600 to-sky-500 p-5 rounded-lg shadow-sm text-white">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm text-blue-100">Ventas mensuales</p>
+                    <h2 class="text-3xl font-bold mt-1">$8.450.000</h2>
+                    <p class="text-sm text-blue-100 mt-2">+12% vs mes anterior</p>
+                </div>
+
+                <div class="bg-white/20 p-4 rounded-2xl">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         viewBox="0 0 24 24"
+                         fill="currentColor"
+                         class="w-9 h-9 text-white">
+                        <path fill-rule="evenodd"
+                              d="M2.25 13.5a8.25 8.25 0 1 1 16.174 2.324l2.151 2.151a.75.75 0 1 1-1.06 1.06l-2.151-2.151A8.25 8.25 0 0 1 2.25 13.5Zm8.25-3a.75.75 0 0 1 .75.75v2.69l2.47-2.47a.75.75 0 1 1 1.06 1.06l-3.75 3.75a.75.75 0 0 1-1.06 0l-1.5-1.5a.75.75 0 1 1 1.06-1.06l.22.22V11.25a.75.75 0 0 1 .75-.75Z"
+                              clip-rule="evenodd" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- PRODUCTOS EN CAJA -->
+        <a href="/ventas/productos-caja"
+           class="bg-white p-5 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition group">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm text-gray-500">Gestión</p>
+                    <h2 class="text-xl font-bold text-gray-800 mt-1">Productos en caja</h2>
+                    <p class="text-sm text-gray-500 mt-2">Administrar productos disponibles</p>
+                </div>
+
+                <div class="bg-purple-100 p-4 rounded-2xl group-hover:bg-purple-200 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         viewBox="0 0 24 24"
+                         fill="currentColor"
+                         class="w-9 h-9 text-purple-600">
+                        <path d="M12.378 1.602a.75.75 0 0 0-.756 0L3 6.632l9 5.25 9-5.25-8.622-5.03Z"/>
+                        <path d="M21.75 8.025 12.75 13.275v9.073l8.628-5.033a.75.75 0 0 0 .372-.648V8.025Z"/>
+                        <path d="M11.25 22.348v-9.073L2.25 8.025v8.642a.75.75 0 0 0 .372.648l8.628 5.033Z"/>
+                    </svg>
+                </div>
+            </div>
+        </a>
+
+    </div>
+
+    <!-- GRÁFICAS -->
+    <div class="grid grid-cols-1 xl:grid-cols-2 gap-4">
+
+        <!-- GRÁFICO DE BARRAS -->
+        <div class="bg-white p-5 rounded-lg shadow-sm border border-gray-200">
+            <div class="mb-5">
+                <h2 class="text-lg font-semibold text-gray-800">Ventas por mes</h2>
+                <p class="text-sm text-gray-500">Ejemplo visual con datos inventados</p>
+            </div>
+
+            <div class="space-y-4">
+                {% set ventas = [
+                    {"mes": "Ene", "monto": 3200000, "porcentaje": 38},
+                    {"mes": "Feb", "monto": 4100000, "porcentaje": 48},
+                    {"mes": "Mar", "monto": 5800000, "porcentaje": 68},
+                    {"mes": "Abr", "monto": 7200000, "porcentaje": 84},
+                    {"mes": "May", "monto": 8450000, "porcentaje": 100}
+                ] %}
+
+                {% for venta in ventas %}
+                <div>
+                    <div class="flex justify-between text-sm mb-1">
+                        <span class="font-medium text-gray-700">{{ venta.mes }}</span>
+                        <span class="text-gray-500">${{ "{:,}".format(venta.monto).replace(",", ".") }}</span>
+                    </div>
+
+                    <div class="w-full bg-gray-100 rounded-full h-3 overflow-hidden">
+                        <div class="bg-blue-600 h-3 rounded-full"
+                             style="width: {{ venta.porcentaje }}%;">
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- GRÁFICO DE BARRAS POR CATEGORÍA -->
+        <div class="bg-white p-5 rounded-lg shadow-sm border border-gray-200">
+            <div class="mb-5">
+                <h2 class="text-lg font-semibold text-gray-800">Ventas por categoría</h2>
+                <p class="text-sm text-gray-500">Ejemplo para analizar productos</p>
+            </div>
+
+            <div class="h-64 flex items-end gap-4 border-b border-gray-200 px-2">
+                <div class="flex-1 flex flex-col items-center gap-2">
+                    <div class="w-full bg-green-500 rounded-t-lg" style="height: 70%;"></div>
+                    <span class="text-xs text-gray-500">Telas</span>
+                </div>
+
+                <div class="flex-1 flex flex-col items-center gap-2">
+                    <div class="w-full bg-blue-500 rounded-t-lg" style="height: 90%;"></div>
+                    <span class="text-xs text-gray-500">Hilos</span>
+                </div>
+
+                <div class="flex-1 flex flex-col items-center gap-2">
+                    <div class="w-full bg-sky-400 rounded-t-lg" style="height: 55%;"></div>
+                    <span class="text-xs text-gray-500">Botones</span>
+                </div>
+
+                <div class="flex-1 flex flex-col items-center gap-2">
+                    <div class="w-full bg-purple-500 rounded-t-lg" style="height: 40%;"></div>
+                    <span class="text-xs text-gray-500">Cierres</span>
+                </div>
+
+                <div class="flex-1 flex flex-col items-center gap-2">
+                    <div class="w-full bg-emerald-500 rounded-t-lg" style="height: 65%;"></div>
+                    <span class="text-xs text-gray-500">Otros</span>
+                </div>
+            </div>
+
+            <div class="mt-4 text-sm text-gray-500">
+                Categoría más vendida: <span class="font-semibold text-gray-800">Hilos</span>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
