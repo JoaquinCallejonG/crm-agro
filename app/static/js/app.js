@@ -85,6 +85,3 @@ function updateFileName(input) {
     }
 }
 
-
-
-<script src="{{ url_for('static', path='js/app.js') }}"></script>

@@ -12,6 +12,5 @@ app = FastAPI()
 Base.metadata.create_all(bind=engine)
 
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
-
 app.include_router(views.router)
 app.include_router(facturas.router)

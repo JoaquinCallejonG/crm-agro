@@ -1,2 +1,6 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+@source "../../templates";
+@source "../../routes";
+@source "../../static/js";
